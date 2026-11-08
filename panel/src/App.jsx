@@ -3,12 +3,15 @@ import { supabase, configurado } from './lib/supabase';
 import { Boton, Cargando } from './components/ui';
 import Login from './pages/Login';
 import Cuentas from './pages/Cuentas';
+import Consumo from './pages/Consumo';
 import Salones from './pages/Salones';
 import Profesores from './pages/Profesores';
 import Productos from './pages/Productos';
+import ErrorBoundary from './components/ErrorBoundary';
 
 const PAGINAS = [
   { id: 'cuentas', nombre: 'Estados de cuenta', Componente: Cuentas },
+  { id: 'consumo', nombre: 'Registrar consumo', Componente: Consumo },
   { id: 'salones', nombre: 'Salones', Componente: Salones },
   { id: 'profesores', nombre: 'Profesores', Componente: Profesores },
   { id: 'productos', nombre: 'Productos', Componente: Productos },
@@ -137,7 +140,9 @@ export default function App() {
 
       <main className="min-w-0 flex-1 px-4 py-6 sm:px-8 sm:py-8">
         <div className="mx-auto max-w-5xl">
-          <Pagina />
+          <ErrorBoundary key={actual.id}>
+            <Pagina />
+          </ErrorBoundary>
         </div>
       </main>
     </div>
